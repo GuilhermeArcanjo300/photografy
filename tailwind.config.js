@@ -13,6 +13,9 @@ export default {
       },
       backgroundColor: {
         'primary': '#F88F87',
+      },
+      borderColor: {
+        'primary': '#F88F87',
       }
     },
   },
