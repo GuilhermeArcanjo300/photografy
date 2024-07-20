@@ -1,0 +1,23 @@
+$size: 25vw;
+$color_primary: #F88F87;
+
+.logo {
+    background-color: $color_primary;
+    position: absolute;
+    z-index: 1;
+    height: $size;
+    width: $size;
+    transform: rotate(45deg);
+    top: calc($size/2 * -1);
+    left: calc($size/2 * -1);
+
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    padding: 30px;
+
+    img {
+        transform: rotate(-45deg);
+        width: calc(25% + 30px);
+    }
+}

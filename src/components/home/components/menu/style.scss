@@ -1,0 +1,37 @@
+$color_primary: #F88F87;
+$color_primary_hover: #ffcfcb;
+
+.menu {
+    background-color: red;
+    position: relative;
+}
+
+.bar {
+    height: 80px;
+    display: flex;
+    justify-content: flex-end;
+    background-color: #FFF;
+
+    span {
+        padding: 0 32px;
+        display: flex;
+        align-items: center;
+        font-family: 'Jomolhari', Courier, monospace;
+        color: $color_primary;
+        cursor: pointer;
+
+        &:hover {
+            background-color: $color_primary_hover;
+        }
+
+        &.signup {
+            background-color: $color_primary;
+            color: #FFF;
+            cursor: pointer;
+
+            &:hover {
+                background-color: $color_primary_hover;
+            }
+        }
+    }
+}

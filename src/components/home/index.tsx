@@ -1,11 +1,14 @@
-import slider1 from '../../assets/image/carousel/slider.jpg';
+import Menu from "./components/menu/menu";
+import Slide from "./components/slide";
+import './style.scss'
 
-const Home = () => {
-  return (
-    <div className="w-screen h-screen p-8 mt-20">
-       <img src={slider1} alt="New Born" className="flex-1" />
-    </div>
-  )
+function Home() {
+    return (
+        <div className="home">
+             <Menu />
+             <Slide />
+        </div>
+    )
 }
 
 export default Home;
