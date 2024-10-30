@@ -15,7 +15,7 @@ export function Contact() {
                         <p>(19) 99786-1306</p>
                     </li>
                     <li>
-                        <p>@deise.akemi</p>
+                        <p>@deise.akemi </p>
                     </li>
                     <li>
                         <p>Deise Akemi Fotografia</p>
