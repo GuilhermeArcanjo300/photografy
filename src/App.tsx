@@ -1,16 +1,11 @@
-import About from "./components/about"
-import { Contact } from "./components/contact"
-import Home from "./components/home"
-import Shoots from "./components/shoots"
+import { Navbar } from './components/Navbar'
+import { HomePage } from './pages/home/HomePage'
 
 function App() {
   return (
-    <>
-      <Home />
-      <Shoots/>
-      <About/>
-      <Contact/>
-    </>
+    <Navbar>
+      <HomePage />
+    </Navbar>
   )
 }
 
