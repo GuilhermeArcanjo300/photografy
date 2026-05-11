@@ -1,29 +1,69 @@
 import ImageProfile from '../../assets/img/photograph/profile.png';
+import { useCounter, useReveal } from '../../hooks/useReveal';
+import './style.scss';
+
+function Stat({ value, suffix, label, start, delay }: { value: number; suffix?: string; label: string; start: boolean; delay: number }) {
+    const v = useCounter(value, 1600, start);
+    return (
+        <li style={{ transitionDelay: `${delay}ms` }}>
+            <strong>
+                {v}
+                {suffix}
+            </strong>
+            <span>{label}</span>
+        </li>
+    );
+}
 
 function About() {
+    const { ref, visible } = useReveal<HTMLDivElement>(0.25);
+
     return (
-        <div style={{backgroundColor: '#000', width: '100%', padding: '96px 48px', display: 'flex', alignItems: 'center', flexDirection: 'column'}}>
-            <p style={{color: '#F88F87', textAlign: 'center', fontSize: '48px', paddingBottom: '24px'}}>
-                Sobre
-            </p>
-            <div style={{width: '100%', maxWidth: '860px', display: 'flex'}}>
-                <p style={{fontSize: '24px', color: '#F88F87', width: 'calc(60% - 56px)'}}>
-                    Meu nome é Deise Akemi, trabalho com fotografia há mais de
-                    4 anos profissionalmente, mas sou amante da
-                    fotografia desde pequena. Foi essa fascinação pela
-                    arte de fotografar que me levou a inveautstir em uma
-                    máquina e me especializar na área. E continuo sempre
-                    em busca de mais conhecimentos para aperfeiçoar
-                    meu trabalho.
-                    Atualmente estou me especializando em Newborn, mas também trabalho com ensaios femininos, masculinos, infantil,
-                    gestantes e de família. Faço ensaios em área
-                    externa ou estúdio.
-                </p>
-                <div style={{width: '6px', backgroundColor: '#F88F87', margin: '0px 24px 0px 24px', borderRadius: '4px'}}></div>
-                <img src={ImageProfile} alt="Imagem Principal" style={{width: '40%'}} />
+        <section className="about" id="sobre">
+            <div className="about__bg" aria-hidden="true">
+                <span className="about__bg-orb about__bg-orb--1" />
+                <span className="about__bg-orb about__bg-orb--2" />
+                <span className="about__bg-grid" />
             </div>
-        </div>
-    )
+
+            <div ref={ref} className={`about__inner ${visible ? 'is-visible' : ''}`}>
+                <div className="about__media">
+                    <div className="about__media-mask">
+                        <img src={ImageProfile} alt="Retrato de Deise Akemi" />
+                    </div>
+                    <span className="about__signature">
+                        <span className="about__signature-pulse" />
+                        Deise Akemi
+                    </span>
+                    <span className="about__media-tag">/ 02 · Sobre</span>
+                </div>
+
+                <div className="about__text">
+                    <span className="eyebrow about__eyebrow">A fotógrafa</span>
+                    <h2 className="about__title">
+                        Fotografar é meu jeito de <em>cuidar</em> do tempo.
+                    </h2>
+                    <p>
+                        Sou Deise Akemi e trabalho com fotografia há mais de quatro
+                        anos profissionalmente — mas amo essa arte desde criança.
+                        Foi essa paixão que me levou a investir em equipamento e a
+                        me especializar, sempre em busca de aperfeiçoar o que entrego.
+                    </p>
+                    <p>
+                        Hoje minha especialidade é Newborn, mas também realizo
+                        ensaios femininos, masculinos, infantis, gestantes e família —
+                        em área externa ou estúdio.
+                    </p>
+
+                    <ul className={`about__stats ${visible ? 'is-visible' : ''}`}>
+                        <Stat value={4} suffix="+" label="anos de carreira" start={visible} delay={0} />
+                        <Stat value={200} suffix="+" label="famílias atendidas" start={visible} delay={120} />
+                        <Stat value={100} suffix="%" label="dedicação" start={visible} delay={240} />
+                    </ul>
+                </div>
+            </div>
+        </section>
+    );
 }
 
 export default About;
