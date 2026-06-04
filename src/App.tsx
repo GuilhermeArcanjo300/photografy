@@ -1,17 +1,30 @@
-import About from "./components/about"
-import { Contact } from "./components/contact"
-import Home from "./components/home"
-import Shoots from "./components/shoots"
+import { Navbar } from './components/Navbar';
+import { Hero } from './components/Hero';
+import { Specialty } from './components/Specialty';
+import { Portfolio } from './components/Portfolio';
+import { About } from './components/About';
+import { Contact } from './components/Contact';
+import { Footer } from './components/Footer';
+import { WhatsAppFab } from './components/WhatsAppFab';
+import { useScrollReveal } from './hooks/useScrollReveal';
 
 function App() {
+  useScrollReveal();
+
   return (
     <>
-      <Home />
-      <Shoots/>
-      <About/>
-      <Contact/>
+      <Navbar />
+      <main>
+        <Hero />
+        <Specialty />
+        <Portfolio />
+        <About />
+        <Contact />
+      </main>
+      <Footer />
+      <WhatsAppFab />
     </>
-  )
+  );
 }
 
-export default App
+export default App;
