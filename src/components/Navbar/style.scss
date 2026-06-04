@@ -1,0 +1,161 @@
+.nav {
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 100;
+  transition:
+    background 0.45s var(--ease),
+    box-shadow 0.45s var(--ease),
+    border-color 0.45s var(--ease);
+  border-bottom: 1px solid transparent;
+
+  &.is-scrolled {
+    background: rgba(251, 247, 242, 0.82);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-bottom-color: var(--line);
+  }
+
+  &__inner {
+    height: var(--nav-h);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+  }
+
+  /* ---- Brand ---- */
+  &__brand {
+    display: flex;
+    flex-direction: column;
+    line-height: 1;
+  }
+
+  &__brand-name {
+    font-family: var(--font-display);
+    font-size: 1.45rem;
+    letter-spacing: 0.01em;
+    color: var(--ink);
+  }
+
+  &__brand-sub {
+    font-size: 0.62rem;
+    font-weight: 500;
+    letter-spacing: 0.42em;
+    text-transform: uppercase;
+    color: var(--blush-deep);
+    margin-top: 0.32rem;
+  }
+
+  /* ---- Desktop links ---- */
+  &__links {
+    display: flex;
+    align-items: center;
+    gap: 2.6rem;
+    margin-left: auto;
+  }
+
+  &__link {
+    position: relative;
+    font-size: 0.92rem;
+    font-weight: 400;
+    letter-spacing: 0.02em;
+    color: var(--ink);
+    padding-block: 0.4rem;
+    transition: color 0.3s var(--ease);
+
+    &::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      height: 1px;
+      background: var(--blush-deep);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.4s var(--ease);
+    }
+
+    &:hover {
+      color: var(--blush-deep);
+    }
+    &:hover::after {
+      transform: scaleX(1);
+    }
+  }
+
+  &__cta {
+    padding: 0.78em 1.5em;
+    font-size: 0.86rem;
+  }
+
+  &__toggle {
+    display: none;
+    width: 44px;
+    height: 44px;
+    align-items: center;
+    justify-content: center;
+    color: var(--ink);
+    margin-left: auto;
+  }
+
+  /* ---- Mobile drawer ---- */
+  &__drawer {
+    position: fixed;
+    inset: var(--nav-h) 0 auto 0;
+    background: var(--cream);
+    border-bottom: 1px solid var(--line);
+    padding: 1.5rem var(--gutter) 2.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    transform: translateY(-12px);
+    opacity: 0;
+    pointer-events: none;
+    transition:
+      opacity 0.35s var(--ease),
+      transform 0.35s var(--ease);
+
+    &.is-open {
+      opacity: 1;
+      transform: none;
+      pointer-events: auto;
+    }
+  }
+
+  &__drawer-links {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__drawer-link {
+    font-family: var(--font-display);
+    font-size: 1.75rem;
+    padding-block: 0.7rem;
+    border-bottom: 1px solid var(--line);
+    transition: color 0.3s var(--ease);
+
+    &:hover {
+      color: var(--blush-deep);
+    }
+  }
+}
+
+@media (max-width: 860px) {
+  .nav {
+    // Scoped under `.nav` so these beat the equal-specificity `.btn` /
+    // `.nav__toggle` base rules regardless of stylesheet injection order.
+    .nav__links,
+    .nav__cta {
+      display: none;
+    }
+    .nav__toggle {
+      display: inline-flex;
+    }
+    &.is-scrolled,
+    &:has(.nav__drawer.is-open) {
+      background: rgba(251, 247, 242, 0.92);
+      backdrop-filter: blur(14px);
+    }
+  }
+}
