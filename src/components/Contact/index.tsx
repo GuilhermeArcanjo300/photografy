@@ -1,78 +1,162 @@
-import { SITE } from '../../site';
+import { useState } from 'react';
+import { SITE, WHATSAPP, whatsappLink } from '../../site';
+import { EXPERIENCES } from '../../content/experiences';
 import {
-  IconArrowUpRight,
   IconInstagram,
   IconPhone,
   IconWhatsApp,
+  IconArrowUpRight,
 } from '../ui/Icons';
 import './style.scss';
 
-const CHANNELS = [
-  {
-    icon: <IconWhatsApp size={26} />,
-    label: 'WhatsApp',
-    value: SITE.phoneDisplay,
-    href: SITE.whatsapp,
-    accent: true,
-  },
-  {
-    icon: <IconInstagram size={26} />,
-    label: 'Instagram',
-    value: SITE.instagramHandle,
-    href: SITE.instagram,
-  },
-  {
-    icon: <IconPhone size={26} />,
-    label: 'Telefone',
-    value: SITE.phoneDisplay,
-    href: `tel:+5519997861306`,
-  },
-];
-
+/**
+ * Contato — briefing items 13 and 16.
+ *
+ * The form composes a WhatsApp message instead of posting to a server: it needs
+ * no backend, can't be abused by spam bots, and lands the lead straight in the
+ * channel the studio already uses.
+ */
 export function Contact() {
+  const [form, setForm] = useState({
+    name: '',
+    experience: '',
+    date: '',
+    message: '',
+  });
+
+  const set = (key: keyof typeof form) => (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>,
+  ) => setForm((f) => ({ ...f, [key]: e.target.value }));
+
+  const onSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    const lines = [
+      `Olá, Deise! Meu nome é ${form.name || '(nome)'}.`,
+      form.experience && `Tenho interesse no ensaio: ${form.experience}.`,
+      form.date && `Data prevista: ${form.date}.`,
+      form.message && `\n${form.message}`,
+    ].filter(Boolean);
+
+    window.open(whatsappLink(lines.join(' ')), '_blank', 'noopener');
+  };
+
   return (
-    <section className="contact section" id="contato">
-      <div className="container">
-        <div className="contact__card" data-reveal>
-          <span className="kicker kicker--center">Vamos conversar</span>
-          <h2 className="contact__title">
-            Vamos eternizar o <em>seu</em> momento?
+    <section className="section contact" id="contato">
+      <div className="container contact__grid">
+        <div className="contact__intro" data-reveal>
+          <p className="kicker">Contato</p>
+          <h2 className="section-title">
+            Vamos combinar <em>o seu ensaio</em>
           </h2>
-          <p className="contact__text">
-            Conta pra mim o que você tem em mente. Será um prazer cuidar de cada
-            detalhe do seu ensaio e transformar esse momento em arte.
+          <p className="lead">
+            Me conte o que você está buscando que eu verifico a disponibilidade
+            na agenda. Respondo pessoalmente cada mensagem.
           </p>
 
-          <a
-            href={SITE.whatsapp}
-            target="_blank"
-            rel="noreferrer"
-            className="btn btn--primary btn--whatsapp contact__main-cta"
-          >
-            <IconWhatsApp size={20} />
-            Falar no WhatsApp
-          </a>
-
           <ul className="contact__channels">
-            {CHANNELS.map((c) => (
-              <li key={c.label}>
-                <a
-                  href={c.href}
-                  target="_blank"
-                  rel="noreferrer"
-                  className={`contact__channel ${c.accent ? 'is-accent' : ''}`}
-                >
-                  <span className="contact__channel-icon">{c.icon}</span>
-                  <span className="contact__channel-info">
-                    <span className="contact__channel-label">{c.label}</span>
-                    <span className="contact__channel-value">{c.value}</span>
+            <li>
+              <a href={WHATSAPP} target="_blank" rel="noreferrer">
+                <IconWhatsApp size={19} />
+                <span>
+                  <small>WhatsApp</small>
+                  {SITE.phoneDisplay}
+                </span>
+                <IconArrowUpRight size={15} />
+              </a>
+            </li>
+            <li>
+              <a href={SITE.instagram} target="_blank" rel="noreferrer">
+                <IconInstagram size={19} />
+                <span>
+                  <small>Instagram</small>
+                  {SITE.instagramHandle}
+                </span>
+                <IconArrowUpRight size={15} />
+              </a>
+            </li>
+            <li>
+              <a href={`tel:${SITE.phoneE164}`}>
+                <IconPhone size={19} />
+                <span>
+                  <small>Telefone</small>
+                  {SITE.phoneDisplay}
+                </span>
+              </a>
+            </li>
+            {SITE.email && (
+              <li>
+                <a href={`mailto:${SITE.email}`}>
+                  <IconArrowUpRight size={19} />
+                  <span>
+                    <small>E-mail</small>
+                    {SITE.email}
                   </span>
-                  <IconArrowUpRight size={18} className="contact__channel-arrow" />
                 </a>
               </li>
-            ))}
+            )}
           </ul>
+
+          {SITE.city && <p className="contact__city">{SITE.city}</p>}
         </div>
+
+        <form className="contact__form" onSubmit={onSubmit} data-reveal data-delay="1">
+          <p className="contact__form-title">Peça seu orçamento</p>
+
+          <label className="field">
+            <span>Seu nome</span>
+            <input
+              type="text"
+              value={form.name}
+              onChange={set('name')}
+              placeholder="Como você se chama?"
+              required
+            />
+          </label>
+
+          <label className="field">
+            <span>Qual ensaio?</span>
+            <select value={form.experience} onChange={set('experience')}>
+              <option value="">Escolha uma experiência</option>
+              {EXPERIENCES.map((e) => (
+                <option key={e.slug} value={e.name}>
+                  {e.name}
+                </option>
+              ))}
+              <option value="Ainda não sei">Ainda não sei</option>
+            </select>
+          </label>
+
+          <label className="field">
+            <span>Data prevista (opcional)</span>
+            <input
+              type="text"
+              value={form.date}
+              onChange={set('date')}
+              placeholder="Ex: outubro, ou a data do parto"
+            />
+          </label>
+
+          <label className="field">
+            <span>Mensagem (opcional)</span>
+            <textarea
+              rows={4}
+              value={form.message}
+              onChange={set('message')}
+              placeholder="Conte um pouco do que você imagina para o ensaio"
+            />
+          </label>
+
+          <button type="submit" className="btn btn--gold contact__submit">
+            <IconWhatsApp size={17} />
+            Enviar pelo WhatsApp
+          </button>
+
+          <p className="contact__note">
+            Ao enviar, o WhatsApp abre com a sua mensagem pronta — você só precisa
+            confirmar o envio.
+          </p>
+        </form>
       </div>
     </section>
   );

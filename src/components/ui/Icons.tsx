@@ -6,7 +6,7 @@ type IconProps = {
 const stroke = {
   fill: 'none',
   stroke: 'currentColor',
-  strokeWidth: 1.6,
+  strokeWidth: 1.5,
   strokeLinecap: 'round' as const,
   strokeLinejoin: 'round' as const,
 };
@@ -70,11 +70,37 @@ export const IconArrowUpRight = ({ size = 24, className }: IconProps) => (
     width={size}
     height={size}
     viewBox="0 0 24 24"
-    className={className}
+    className={`icon-arrow ${className ?? ''}`}
     aria-hidden="true"
     {...stroke}
   >
     <path d="M7 17 17 7M8 7h9v9" />
+  </svg>
+);
+
+export const IconArrowRight = ({ size = 24, className }: IconProps) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    className={className}
+    aria-hidden="true"
+    {...stroke}
+  >
+    <path d="M4 12h16M14 6l6 6-6 6" />
+  </svg>
+);
+
+export const IconArrowLeft = ({ size = 24, className }: IconProps) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    className={className}
+    aria-hidden="true"
+    {...stroke}
+  >
+    <path d="M20 12H4M10 6l-6 6 6 6" />
   </svg>
 );
 
@@ -101,5 +127,112 @@ export const IconClose = ({ size = 24, className }: IconProps) => (
     {...stroke}
   >
     <path d="M18 6 6 18M6 6l12 12" />
+  </svg>
+);
+
+export const IconCheck = ({ size = 16, className }: IconProps) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    className={className}
+    aria-hidden="true"
+    {...stroke}
+  >
+    <path d="M20 6 9 17l-5-5" />
+  </svg>
+);
+
+export const IconPlus = ({ size = 20, className }: IconProps) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    className={className}
+    aria-hidden="true"
+    {...stroke}
+  >
+    <path d="M12 5v14M5 12h14" />
+  </svg>
+);
+
+export const IconGift = ({ size = 24, className }: IconProps) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    className={className}
+    aria-hidden="true"
+    {...stroke}
+  >
+    <path d="M20 12v8a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-8M2 7h20v5H2zM12 21V7M12 7S9.5 7 8.2 5.8A2.4 2.4 0 0 1 12 3a2.4 2.4 0 0 1 3.8 2.8C14.5 7 12 7 12 7Z" />
+  </svg>
+);
+
+export const IconClock = ({ size = 24, className }: IconProps) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    className={className}
+    aria-hidden="true"
+    {...stroke}
+  >
+    <circle cx="12" cy="12" r="9" />
+    <path d="M12 7v5l3.5 2" />
+  </svg>
+);
+
+export const IconCamera = ({ size = 24, className }: IconProps) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    className={className}
+    aria-hidden="true"
+    {...stroke}
+  >
+    <path d="M4 8h2.5l1.4-2h8.2L17.5 8H20a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1Z" />
+    <circle cx="12" cy="13.5" r="3.4" />
+  </svg>
+);
+
+export const IconHeart = ({ size = 24, className }: IconProps) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    className={className}
+    aria-hidden="true"
+    {...stroke}
+  >
+    <path d="M12 20.3 4.6 13a4.6 4.6 0 0 1 6.5-6.5l.9.9.9-.9A4.6 4.6 0 0 1 19.4 13Z" />
+  </svg>
+);
+
+export const IconSparkle = ({ size = 24, className }: IconProps) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    className={className}
+    aria-hidden="true"
+    {...stroke}
+  >
+    <path d="M12 3l1.9 5.6L19.5 10l-5.6 1.9L12 17.5l-1.9-5.6L4.5 10l5.6-1.4z" />
+    <path d="M18.5 16.5l.7 2 2 .7-2 .7-.7 2-.7-2-2-.7 2-.7z" />
+  </svg>
+);
+
+export const IconQuote = ({ size = 28, className }: IconProps) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="currentColor"
+    className={className}
+    aria-hidden="true"
+  >
+    <path d="M9.4 5.6c-3 1.3-5 4-5 7.4 0 3.4 1.9 5.4 4.3 5.4 2 0 3.6-1.5 3.6-3.5 0-1.9-1.3-3.3-3.1-3.3-.3 0-.7 0-.9.1.3-1.7 1.7-3.3 3.6-4.2l-2.5-1.9Zm9.3 0c-3 1.3-5 4-5 7.4 0 3.4 1.9 5.4 4.3 5.4 2 0 3.6-1.5 3.6-3.5 0-1.9-1.3-3.3-3.1-3.3-.3 0-.7 0-.9.1.3-1.7 1.7-3.3 3.6-4.2l-2.5-1.9Z" />
   </svg>
 );

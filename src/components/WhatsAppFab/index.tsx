@@ -1,21 +1,22 @@
-import { SITE } from '../../site';
+import { WHATSAPP } from '../../site';
 import { useScrolled } from '../../hooks/useScrolled';
 import { IconWhatsApp } from '../ui/Icons';
 import './style.scss';
 
+/** Persistent quote shortcut — briefing item 17 (conversão). */
 export function WhatsAppFab() {
-  const visible = useScrolled(500);
+  const visible = useScrolled(520);
 
   return (
     <a
-      href={SITE.whatsapp}
+      href={WHATSAPP}
       target="_blank"
       rel="noreferrer"
-      className={`wa-fab ${visible ? 'is-visible' : ''}`}
-      aria-label="Agendar pelo WhatsApp"
+      className={`fab ${visible ? 'is-visible' : ''}`}
+      aria-label="Pedir orçamento pelo WhatsApp"
     >
-      <IconWhatsApp size={28} />
-      <span className="wa-fab__label">Agendar ensaio</span>
+      <IconWhatsApp size={23} />
+      <span className="fab__label">Pedir orçamento</span>
     </a>
   );
 }

@@ -1,4 +1,4 @@
-.wa-fab {
+.fab {
   position: fixed;
   right: clamp(1rem, 3vw, 2rem);
   bottom: clamp(1rem, 3vw, 2rem);
@@ -6,52 +6,47 @@
 
   display: inline-flex;
   align-items: center;
-  gap: 0;
-  height: 60px;
-  padding: 0 16px;
+  gap: 0.7rem;
+  padding: 0.95rem 1.35rem;
   border-radius: 100px;
-  background: #25d366;
-  color: #fff;
-  box-shadow: 0 16px 34px -12px rgba(37, 211, 102, 0.7);
+  background: var(--gold);
+  color: var(--white);
+  box-shadow: 0 14px 34px rgba(42, 37, 33, 0.24);
 
   opacity: 0;
-  transform: translateY(20px) scale(0.9);
-  pointer-events: none;
+  visibility: hidden;
+  transform: translateY(14px);
   transition:
-    opacity 0.4s var(--ease),
-    transform 0.4s var(--ease),
-    gap 0.4s var(--ease),
-    padding 0.4s var(--ease);
+    opacity 0.5s var(--ease),
+    transform 0.5s var(--ease),
+    background 0.4s var(--ease),
+    visibility 0.5s;
 
   &.is-visible {
     opacity: 1;
+    visibility: visible;
     transform: none;
-    pointer-events: auto;
-  }
-
-  &__label {
-    max-width: 0;
-    overflow: hidden;
-    white-space: nowrap;
-    font-size: 0.92rem;
-    font-weight: 500;
-    transition: max-width 0.4s var(--ease);
   }
 
   &:hover {
-    gap: 10px;
+    background: var(--gold-deep);
   }
-  &:hover &__label {
-    max-width: 160px;
+
+  &__label {
+    font-size: 0.76rem;
+    font-weight: 400;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    white-space: nowrap;
   }
 }
 
-@media (max-width: 600px) {
-  /* Keep it compact on mobile so it never covers content. */
-  .wa-fab:hover {
-    gap: 0;
-  }
-  .wa-fab:hover .wa-fab__label {
-    max-width: 0;
+@media (max-width: 620px) {
+  .fab {
+    padding: 0.95rem;
+
+    &__label {
+      display: none;
+    }
   }
 }

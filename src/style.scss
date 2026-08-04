@@ -1,35 +1,43 @@
 /* ============================================================
    Deise Akemi · Fotografia — global foundation
-   Design tokens, reset, base typography, shared UI primitives.
+   Palette: branco, bege, areia e dourado suave (briefing item 3).
+   Minimalista, fotos grandes, muito espaço em branco.
    ============================================================ */
 
 :root {
-  /* Palette */
-  --cream: #fbf7f2;
-  --cream-2: #f4ebe1;
-  --sand: #e8dccc;
-  --ink: #1b1714;
-  --ink-2: #2a231e;
-  --muted: #837569;
-  --blush: #ec8a82;
-  --blush-deep: #c95a50;
-  --blush-soft: #fbe7e2;
+  /* ---- Palette ---- */
   --white: #ffffff;
-  --line: rgba(27, 23, 20, 0.12);
-  --line-light: rgba(251, 247, 242, 0.16);
+  --cream: #fcfaf6;
+  --beige: #f5eee4;
+  --sand: #e9dcc9;
+  --taupe: #d6c6b0;
 
-  /* Typography */
-  --font-display: 'Fraunces', Georgia, 'Times New Roman', serif;
+  --gold: #b0904f;
+  --gold-deep: #8a6e36;
+  --gold-light: #d9c293;
+  --gold-wash: #f7f1e5;
+
+  --ink: #2a2521;
+  --ink-soft: #453d35;
+  --muted: #6f6558;
+
+  --line: rgba(42, 37, 33, 0.1);
+  --line-strong: rgba(42, 37, 33, 0.18);
+  --line-light: rgba(252, 250, 246, 0.22);
+
+  /* ---- Typography ---- */
+  --font-display: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
   --font-sans: 'Jost', system-ui, -apple-system, 'Segoe UI', sans-serif;
 
-  /* Layout */
-  --maxw: 1280px;
-  --gutter: clamp(1.25rem, 5vw, 4.5rem);
-  --nav-h: 78px;
-  --radius: 6px;
-  --radius-lg: 22px;
+  /* ---- Layout ---- */
+  --maxw: 1320px;
+  --maxw-text: 68ch;
+  --gutter: clamp(1.25rem, 5vw, 5rem);
+  --nav-h: 80px;
+  --radius: 3px;
+  --radius-lg: 4px;
 
-  /* Motion */
+  /* ---- Motion ---- */
   --ease: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -49,10 +57,10 @@ html {
 
 body {
   font-family: var(--font-sans);
-  font-weight: 400;
-  font-size: clamp(1rem, 0.96rem + 0.2vw, 1.075rem);
-  line-height: 1.7;
-  color: var(--ink);
+  font-weight: 300;
+  font-size: clamp(1rem, 0.96rem + 0.2vw, 1.06rem);
+  line-height: 1.75;
+  color: var(--ink-soft);
   background: var(--cream);
   overflow-x: hidden;
 }
@@ -84,37 +92,36 @@ h2,
 h3,
 h4 {
   font-family: var(--font-display);
-  font-weight: 400;
-  font-optical-sizing: auto;
-  line-height: 1.04;
-  letter-spacing: -0.01em;
+  font-weight: 300;
+  line-height: 1.08;
+  letter-spacing: -0.005em;
+  color: var(--ink);
 }
 
 ::selection {
-  background: var(--blush);
+  background: var(--gold-light);
   color: var(--ink);
 }
 
 :focus-visible {
-  outline: 2px solid var(--blush-deep);
+  outline: 2px solid var(--gold-deep);
   outline-offset: 3px;
   border-radius: 2px;
 }
 
-/* Custom scrollbar (progressive enhancement) */
 ::-webkit-scrollbar {
-  width: 11px;
+  width: 10px;
 }
 ::-webkit-scrollbar-track {
-  background: var(--cream-2);
+  background: var(--beige);
 }
 ::-webkit-scrollbar-thumb {
-  background: var(--sand);
+  background: var(--taupe);
   border-radius: 100px;
-  border: 3px solid var(--cream-2);
+  border: 3px solid var(--beige);
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--blush);
+  background: var(--gold);
 }
 
 /* ---------- Layout helpers ---------- */
@@ -126,9 +133,37 @@ h4 {
   padding-inline: var(--gutter);
 }
 
+.container--narrow {
+  max-width: 900px;
+}
+
 .section {
-  padding-block: clamp(4.5rem, 9vw, 9rem);
+  padding-block: clamp(4.5rem, 9vw, 10rem);
   scroll-margin-top: var(--nav-h);
+}
+
+.section--tight {
+  padding-block: clamp(3.5rem, 6vw, 6rem);
+}
+
+.section--tint {
+  background: var(--beige);
+}
+
+.section--wash {
+  background: var(--gold-wash);
+}
+
+.section--dark {
+  background: var(--ink);
+  color: var(--sand);
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    color: var(--cream);
+  }
 }
 
 /* ---------- Typographic primitives ---------- */
@@ -136,39 +171,103 @@ h4 {
 .kicker {
   display: inline-flex;
   align-items: center;
-  gap: 0.85em;
-  font-size: 0.76rem;
-  font-weight: 500;
-  letter-spacing: 0.3em;
+  gap: 0.9em;
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  font-weight: 400;
+  letter-spacing: 0.34em;
   text-transform: uppercase;
-  color: var(--blush-deep);
+  color: var(--gold-deep);
 }
 
 .kicker::before {
   content: '';
-  width: 2.4em;
+  width: 2.6em;
   height: 1px;
   background: currentColor;
-  opacity: 0.7;
+  opacity: 0.6;
+}
+
+.kicker--center {
+  justify-content: center;
 }
 
 .kicker--center::before {
   display: none;
 }
 
+.kicker--light {
+  color: var(--gold-light);
+}
+
 .section-title {
-  font-size: clamp(2.1rem, 1.4rem + 3.2vw, 3.9rem);
-  margin-top: 0.5rem;
+  font-size: clamp(2.15rem, 1.3rem + 3.4vw, 4.1rem);
+  margin-top: 0.65rem;
 }
 
 .section-title em {
   font-style: italic;
-  color: var(--blush-deep);
+  color: var(--gold-deep);
+}
+
+.section--dark .section-title em {
+  color: var(--gold-light);
 }
 
 .lead {
   color: var(--muted);
-  max-width: 52ch;
+  max-width: 56ch;
+  font-size: 1.02em;
+}
+
+.section--dark .lead {
+  color: var(--taupe);
+}
+
+.prose p + p {
+  margin-top: 1.15em;
+}
+
+/* Elegant gold divider, echoes the PDFs' ornament. */
+.rule {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.9rem;
+  color: var(--gold);
+}
+
+.rule::before,
+.rule::after {
+  content: '';
+  height: 1px;
+  width: clamp(2.5rem, 9vw, 6rem);
+  background: currentColor;
+  opacity: 0.45;
+}
+
+.rule__dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+/* Big editorial pull quote. */
+.pullquote {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 300;
+  font-size: clamp(1.5rem, 1rem + 2.2vw, 2.6rem);
+  line-height: 1.3;
+  color: var(--ink);
+  text-align: center;
+  max-width: 26ch;
+  margin-inline: auto;
+}
+
+.section--dark .pullquote {
+  color: var(--cream);
 }
 
 /* ---------- Buttons ---------- */
@@ -177,24 +276,27 @@ h4 {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 0.55em;
+  gap: 0.6em;
   font-family: var(--font-sans);
-  font-size: 0.92rem;
-  font-weight: 500;
-  letter-spacing: 0.02em;
-  padding: 1.05em 1.95em;
+  font-size: 0.82rem;
+  font-weight: 400;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  padding: 1.15em 2.1em;
   border-radius: 100px;
   border: 1px solid transparent;
   cursor: pointer;
+  text-align: center;
   transition:
-    background 0.4s var(--ease),
-    color 0.4s var(--ease),
-    border-color 0.4s var(--ease),
-    transform 0.4s var(--ease);
+    background 0.45s var(--ease),
+    color 0.45s var(--ease),
+    border-color 0.45s var(--ease),
+    transform 0.45s var(--ease);
 }
 
 .btn svg {
-  transition: transform 0.4s var(--ease);
+  transition: transform 0.45s var(--ease);
+  flex: none;
 }
 
 .btn:hover {
@@ -202,20 +304,19 @@ h4 {
 }
 
 .btn--primary {
-  background: var(--blush);
-  color: var(--ink);
-}
-.btn--primary:hover {
-  background: var(--blush-deep);
-  color: var(--white);
-}
-
-.btn--dark {
   background: var(--ink);
   color: var(--cream);
 }
-.btn--dark:hover {
+.btn--primary:hover {
   background: #000;
+}
+
+.btn--gold {
+  background: var(--gold);
+  color: var(--white);
+}
+.btn--gold:hover {
+  background: var(--gold-deep);
 }
 
 .btn--light {
@@ -227,8 +328,8 @@ h4 {
 }
 
 .btn--ghost {
-  border-color: currentColor;
-  background: transparent;
+  border-color: var(--line-strong);
+  color: var(--ink);
 }
 .btn--ghost:hover {
   background: var(--ink);
@@ -238,7 +339,6 @@ h4 {
 
 .btn--ghost-light {
   border-color: var(--line-light);
-  background: transparent;
   color: var(--cream);
 }
 .btn--ghost-light:hover {
@@ -247,26 +347,141 @@ h4 {
   border-color: var(--cream);
 }
 
-.btn:hover svg {
-  transform: translate(2px, -2px);
+.btn--ghost-gold {
+  border-color: var(--gold);
+  color: var(--gold-deep);
 }
-.btn--whatsapp:hover svg {
-  transform: scale(1.08);
+.btn--ghost-gold:hover {
+  background: var(--gold);
+  color: var(--white);
+}
+
+.btn:hover svg.icon-arrow {
+  transform: translate(3px, -3px);
+}
+
+.btn--sm {
+  padding: 0.85em 1.6em;
+  font-size: 0.74rem;
+}
+
+/* Understated text link with an animated underline. */
+.link-quiet {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+  font-size: 0.8rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--gold-deep);
+  padding-bottom: 2px;
+  background-image: linear-gradient(currentColor, currentColor);
+  background-size: 0% 1px;
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  transition: background-size 0.5s var(--ease);
+}
+
+.link-quiet:hover {
+  background-size: 100% 1px;
+}
+
+/* ---------- Cards & lists ---------- */
+
+.check-list {
+  display: grid;
+  gap: 0.85rem;
+}
+
+.check-list li {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.85rem;
+  align-items: start;
+  color: var(--ink-soft);
+}
+
+.check-list svg {
+  margin-top: 0.42em;
+  color: var(--gold);
+  flex: none;
+}
+
+.info-list {
+  display: grid;
+  gap: 0.7rem;
+}
+
+.info-list li {
+  position: relative;
+  padding-left: 1.4rem;
+  color: var(--muted);
+  font-size: 0.95em;
+}
+
+.info-list li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.72em;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--gold-light);
 }
 
 /* ---------- Scroll reveal ---------- */
 
 [data-reveal] {
   opacity: 0;
-  transform: translateY(30px);
+  transform: translateY(26px);
   transition:
-    opacity 0.9s var(--ease),
-    transform 0.9s var(--ease);
+    opacity 1s var(--ease),
+    transform 1s var(--ease);
   will-change: opacity, transform;
 }
+
 [data-reveal].is-visible {
   opacity: 1;
   transform: none;
+}
+
+/* Staggered children, used on card grids. */
+[data-reveal][data-delay='1'] {
+  transition-delay: 0.09s;
+}
+[data-reveal][data-delay='2'] {
+  transition-delay: 0.18s;
+}
+[data-reveal][data-delay='3'] {
+  transition-delay: 0.27s;
+}
+[data-reveal][data-delay='4'] {
+  transition-delay: 0.36s;
+}
+[data-reveal][data-delay='5'] {
+  transition-delay: 0.45s;
+}
+
+/* Ken-burns drift for hero photography. */
+@keyframes slow-zoom {
+  from {
+    transform: scale(1.02);
+  }
+  to {
+    transform: scale(1.11);
+  }
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -282,6 +497,7 @@ h4 {
   *::before,
   *::after {
     animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
     transition-duration: 0.001ms !important;
   }
 }

@@ -1,76 +1,89 @@
 .about {
-  background: var(--ink);
-  color: var(--cream);
-  overflow: hidden;
-
-  &__inner {
+  &__grid {
     display: grid;
     grid-template-columns: 0.85fr 1fr;
-    gap: clamp(2.5rem, 6vw, 5.5rem);
+    gap: clamp(2rem, 6vw, 5.5rem);
     align-items: center;
   }
 
   &__media {
     position: relative;
 
+    img {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      aspect-ratio: 4 / 5;
+      object-fit: cover;
+      object-position: center 18%;
+    }
+
+    /* Thin gold frame offset behind the portrait. */
     &::before {
       content: '';
       position: absolute;
-      inset: -0.9rem -0.9rem auto auto;
-      width: 62%;
-      height: 62%;
-      border: 1px solid var(--blush);
-      border-radius: var(--radius-lg);
-      opacity: 0.5;
-    }
-
-    img {
-      position: relative;
-      width: 100%;
-      aspect-ratio: 4 / 4.6;
-      object-fit: cover;
-      object-position: center top;
-      border-radius: var(--radius-lg);
+      inset: -14px -14px 14px 14px;
+      border: 1px solid var(--gold-light);
+      pointer-events: none;
     }
   }
 
-  &__text {
-    margin-top: 1.5rem;
-    display: grid;
-    gap: 1.1rem;
-    color: rgba(251, 247, 242, 0.82);
-    max-width: 56ch;
+  &__badge {
+    position: absolute;
+    /* Above the portrait, which sits on z-index 1 for the gold frame. */
+    z-index: 2;
+    left: 50%;
+    bottom: -1.4rem;
+    transform: translateX(-50%);
+    white-space: nowrap;
+    background: var(--cream);
+    border: 1px solid var(--line);
+    padding: 0.75em 1.5em;
+    font-size: 0.76rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+
+    em {
+      font-family: var(--font-display);
+      font-style: italic;
+      text-transform: none;
+      letter-spacing: 0;
+      font-size: 1.15rem;
+      color: var(--gold-deep);
+      margin-right: 0.25em;
+    }
   }
 
-  &__stats {
-    display: flex;
-    flex-wrap: wrap;
-    gap: clamp(1.5rem, 4vw, 3.2rem);
-    margin-top: 2.6rem;
-    padding-top: 2.2rem;
-    border-top: 1px solid var(--line-light);
+  &__prose {
+    margin-top: 1.75rem;
+    color: var(--muted);
+    max-width: 58ch;
   }
 
-  &__stat-value {
-    display: block;
+  &__quote {
+    margin-top: 2rem;
+    padding-left: 1.4rem;
+    border-left: 2px solid var(--gold-light);
     font-family: var(--font-display);
-    font-size: clamp(2.2rem, 1.6rem + 1.8vw, 3rem);
-    line-height: 1;
-    color: var(--blush);
+    font-style: italic;
+    font-size: 1.28rem;
+    line-height: 1.45;
+    color: var(--ink);
   }
 
-  &__stat-label {
-    display: block;
-    margin-top: 0.4rem;
-    font-size: 0.82rem;
-    letter-spacing: 0.04em;
-    color: rgba(251, 247, 242, 0.7);
+  &__link {
+    margin-top: 2rem;
   }
 }
 
-@media (max-width: 880px) {
-  .about__inner {
+@media (max-width: 900px) {
+  .about__grid {
     grid-template-columns: 1fr;
-    max-width: 30rem;
+    gap: 3.5rem;
+  }
+
+  .about__media {
+    max-width: 440px;
   }
 }

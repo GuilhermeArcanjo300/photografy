@@ -5,8 +5,11 @@ import { useEffect } from 'react';
  * `is-visible` class. The accompanying CSS handles the transition and honours
  * `prefers-reduced-motion`. Falls back to showing everything when
  * IntersectionObserver is unavailable.
+ *
+ * Pass a `key` (usually the route path) so the observer is rebuilt whenever the
+ * page swaps its content.
  */
-export function useScrollReveal() {
+export function useScrollReveal(key?: string) {
   useEffect(() => {
     const els = Array.from(
       document.querySelectorAll<HTMLElement>('[data-reveal]'),
@@ -26,10 +29,10 @@ export function useScrollReveal() {
           }
         });
       },
-      { threshold: 0.12, rootMargin: '0px 0px -8% 0px' },
+      { threshold: 0.1, rootMargin: '0px 0px -6% 0px' },
     );
 
     els.forEach((el) => io.observe(el));
     return () => io.disconnect();
-  }, []);
+  }, [key]);
 }

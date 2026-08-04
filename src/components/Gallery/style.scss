@@ -1,0 +1,171 @@
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: clamp(0.75rem, 1.6vw, 1.4rem);
+
+  &__item {
+    position: relative;
+    display: block;
+    overflow: hidden;
+    aspect-ratio: 3 / 2;
+    background: var(--beige);
+    cursor: zoom-in;
+
+    &.is-portrait {
+      aspect-ratio: 3 / 4;
+      grid-row: span 2;
+    }
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition:
+        transform 1.2s var(--ease),
+        filter 0.6s var(--ease);
+    }
+
+    &:hover img {
+      transform: scale(1.05);
+    }
+
+    &:hover .gallery__tag {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  &__tag {
+    position: absolute;
+    left: 0.9rem;
+    bottom: 0.9rem;
+    padding: 0.35em 0.9em;
+    border-radius: 100px;
+    background: rgba(252, 250, 246, 0.92);
+    color: var(--ink);
+    font-size: 0.62rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    opacity: 0;
+    transform: translateY(6px);
+    transition:
+      opacity 0.45s var(--ease),
+      transform 0.45s var(--ease);
+  }
+}
+
+/* Portrait cells spanning two rows need a denser row height on wide screens. */
+@media (min-width: 900px) {
+  .gallery {
+    grid-auto-rows: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .gallery__item.is-portrait {
+    grid-row: span 1;
+  }
+}
+
+/* ---------- Lightbox ---------- */
+
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: clamp(0.5rem, 2vw, 2rem);
+  padding: clamp(1rem, 4vw, 3rem);
+  background: rgba(16, 13, 11, 0.94);
+  animation: lb-in 0.35s var(--ease);
+
+  &__figure {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    max-height: 100%;
+    min-width: 0;
+
+    img {
+      max-width: 100%;
+      max-height: 78svh;
+      width: auto;
+      object-fit: contain;
+      box-shadow: 0 30px 70px rgba(0, 0, 0, 0.45);
+    }
+
+    figcaption {
+      font-size: 0.78rem;
+      letter-spacing: 0.06em;
+      color: rgba(252, 250, 246, 0.62);
+      text-align: center;
+      max-width: 60ch;
+    }
+  }
+
+  &__close {
+    position: absolute;
+    top: clamp(1rem, 3vw, 2rem);
+    right: clamp(1rem, 3vw, 2rem);
+    color: var(--cream);
+    opacity: 0.75;
+    transition: opacity 0.3s var(--ease);
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+
+  &__nav {
+    width: 48px;
+    height: 48px;
+    display: grid;
+    place-items: center;
+    border: 1px solid rgba(252, 250, 246, 0.24);
+    border-radius: 50%;
+    color: var(--cream);
+    transition:
+      background 0.35s var(--ease),
+      color 0.35s var(--ease);
+
+    &:hover {
+      background: var(--cream);
+      color: var(--ink);
+    }
+  }
+}
+
+@keyframes lb-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@media (max-width: 640px) {
+  .lightbox {
+    grid-template-columns: 1fr;
+    grid-template-areas: 'figure';
+
+    &__figure {
+      grid-area: figure;
+    }
+
+    &__nav {
+      position: absolute;
+      bottom: 1.5rem;
+
+      &--prev {
+        left: 25%;
+      }
+      &--next {
+        right: 25%;
+      }
+    }
+  }
+}
