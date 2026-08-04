@@ -23,7 +23,7 @@ export const SITE = {
   address: '',
 
   /** Site URL used for canonical tags and the sitemap. */
-  url: 'https://deiseakemi.vercel.app',
+  url: 'https://photografy.vercel.app',
 } as const;
 
 /** Builds a WhatsApp deep link with a pre-filled message. */

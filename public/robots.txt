@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://deiseakemi.vercel.app/sitemap.xml
+Sitemap: https://photografy.vercel.app/sitemap.xml
