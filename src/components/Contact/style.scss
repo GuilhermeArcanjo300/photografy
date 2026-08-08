@@ -1,40 +1,129 @@
 .contact {
-  &__inner {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
+  &__grid {
+    display: grid;
+    grid-template-columns: 1fr 0.9fr;
+    gap: clamp(2.5rem, 6vw, 5.5rem);
+    align-items: start;
   }
 
   &__lead {
     margin-top: 1.35rem;
-    margin-inline: auto;
   }
 
   &__actions {
-    margin-top: 2.5rem;
+    margin-top: 2.25rem;
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
     gap: 0.8rem;
   }
 
   &__meta {
     margin-top: 2rem;
-    font-size: 0.76rem;
+    font-size: 0.74rem;
     letter-spacing: 0.18em;
     text-transform: uppercase;
     color: var(--muted);
+  }
+
+  /* ---- Formulário ---- */
+  &__form {
+    background: var(--beige);
+    border-radius: 10px;
+    padding: clamp(1.75rem, 4vw, 3rem);
+    display: grid;
+    gap: 1.1rem;
+  }
+
+  &__form-title {
+    font-family: var(--font-display);
+    font-size: 1.7rem;
+    line-height: 1.2;
+    color: var(--ink);
+  }
+
+  &__submit {
+    margin-top: 0.6rem;
+    width: 100%;
+  }
+
+  &__note {
+    font-size: 0.78rem;
+    line-height: 1.6;
+    color: var(--muted);
+    text-align: center;
+  }
+}
+
+.field {
+  display: grid;
+  gap: 0.45rem;
+
+  > span {
+    font-size: 0.68rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  input,
+  select,
+  textarea {
+    font-family: var(--font-sans);
+    font-size: 0.97rem;
+    font-weight: 300;
+    color: var(--ink);
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    padding: 0.85em 1em;
+    width: 100%;
+    transition:
+      border-color 0.35s var(--ease),
+      box-shadow 0.35s var(--ease);
+
+    &::placeholder {
+      color: rgba(111, 101, 88, 0.6);
+    }
+
+    &:focus {
+      outline: none;
+      border-color: var(--gold);
+      box-shadow: 0 0 0 3px rgba(176, 144, 79, 0.14);
+    }
+  }
+
+  textarea {
+    resize: vertical;
+    min-height: 110px;
+  }
+
+  select {
+    appearance: none;
+    background-image: linear-gradient(45deg, transparent 50%, var(--gold) 50%),
+      linear-gradient(135deg, var(--gold) 50%, transparent 50%);
+    background-position:
+      calc(100% - 20px) 1.15em,
+      calc(100% - 14px) 1.15em;
+    background-size:
+      6px 6px,
+      6px 6px;
+    background-repeat: no-repeat;
+    padding-right: 2.75rem;
+  }
+}
+
+@media (max-width: 900px) {
+  .contact__grid {
+    grid-template-columns: 1fr;
   }
 }
 
 @media (max-width: 560px) {
   .contact__actions {
     width: 100%;
-    flex-direction: column;
 
     .btn {
-      width: 100%;
+      flex: 1 1 100%;
     }
   }
 }
