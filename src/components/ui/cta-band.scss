@@ -1,8 +1,33 @@
 .cta-band {
+  position: relative;
   background: var(--ink);
-  padding-block: clamp(3.5rem, 8vw, 7rem);
+  padding-block: clamp(4rem, 9vw, 8rem);
+  overflow: hidden;
+
+  &__media {
+    position: absolute;
+    inset: 0;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  &__veil {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to top,
+      rgba(18, 15, 12, 0.86) 0%,
+      rgba(18, 15, 12, 0.7) 50%,
+      rgba(18, 15, 12, 0.8) 100%
+    );
+  }
 
   &__inner {
+    position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -13,16 +38,31 @@
   &__title {
     font-size: clamp(1.9rem, 1.2rem + 2.8vw, 3.4rem);
     color: var(--cream);
-    max-width: 26ch;
+    max-width: 24ch;
     text-wrap: balance;
   }
 
   &__text {
-    color: rgba(214, 198, 176, 0.82);
-    max-width: 52ch;
+    color: rgba(214, 198, 176, 0.86);
+    max-width: 54ch;
   }
 
-  .btn {
-    margin-top: 1.1rem;
+  &__actions {
+    margin-top: 1.3rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.8rem;
+  }
+}
+
+@media (max-width: 560px) {
+  .cta-band__actions {
+    width: 100%;
+    flex-direction: column;
+
+    .btn {
+      width: 100%;
+    }
   }
 }

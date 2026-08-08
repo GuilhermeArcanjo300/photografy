@@ -1,0 +1,32 @@
+.home-intro {
+  text-align: center;
+
+  &__title {
+    font-size: clamp(2rem, 1.4rem + 2.6vw, 3.4rem);
+  }
+
+  &__text {
+    margin-top: 1.4rem;
+    margin-inline: auto;
+    max-width: 60ch;
+    color: var(--muted);
+    font-size: 1.04rem;
+  }
+}
+
+.home-pause__rule {
+  margin-bottom: 2.25rem;
+}
+
+.home-exp {
+  &__head {
+    text-align: center;
+    margin-bottom: clamp(2.5rem, 5vw, 4rem);
+  }
+
+  &__more {
+    margin-top: clamp(2.5rem, 5vw, 4rem);
+    display: flex;
+    justify-content: center;
+  }
+}

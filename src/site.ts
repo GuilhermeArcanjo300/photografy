@@ -8,17 +8,18 @@
 export const SITE = {
   name: 'Deise Akemi',
   fullName: 'Deise Akemi Fotografia',
-  role: 'Especialista em Newborn, Gestante e Família',
-  tagline: 'Fotografia que transforma momentos em memórias para toda a vida.',
+  role: 'Especialista em Newborn, Gestante e Fotografia de Família',
+  tagline:
+    'O tempo passa. As lembranças permanecem. Guarde as mais importantes para sempre.',
   phoneDisplay: '(19) 99786-1306',
   phoneE164: '+5519997861306',
   instagramHandle: '@deise.akemi',
   instagram: 'https://www.instagram.com/deise.akemi/',
 
-  /** TODO: preencher com o e-mail real do estúdio (não consta nos PDFs). */
+  /** TODO: preencher com o e-mail real do estúdio (ainda não informado). */
   email: '',
-  /** TODO: preencher com a cidade/região de atendimento (não consta nos PDFs). */
-  city: '',
+  /** Região de atendimento (briefing "Site 02", rodapé). */
+  city: 'Capivari e região',
   /** TODO: endereço do estúdio, se quiser exibir mapa. */
   address: '',
 

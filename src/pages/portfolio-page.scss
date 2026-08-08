@@ -1,34 +1,107 @@
 .pf {
-  &__filters {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 0.5rem;
-    margin-bottom: clamp(2rem, 4vw, 3rem);
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: clamp(1.5rem, 3vw, 2.75rem);
   }
 
-  &__filter {
-    padding: 0.7em 1.5em;
-    border: 1px solid var(--line);
-    border-radius: 100px;
-    font-size: 0.72rem;
+  &__card {
+    display: block;
+  }
+
+  &__media {
+    position: relative;
+    aspect-ratio: 3 / 4;
+    overflow: hidden;
+    border-radius: 10px;
+    background: var(--beige);
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 1.1s var(--ease);
+    }
+  }
+
+  &__card:hover &__media img {
+    transform: scale(1.05);
+  }
+
+  &__placeholder {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    gap: 0.35rem;
+    background: radial-gradient(
+      circle at 50% 38%,
+      var(--gold-wash) 0%,
+      var(--beige) 55%,
+      var(--sand) 100%
+    );
+    color: var(--gold);
+
+    span {
+      font-family: var(--font-display);
+      font-size: clamp(2.6rem, 7vw, 4rem);
+      line-height: 1;
+      opacity: 0.5;
+    }
+
+    svg {
+      opacity: 0.55;
+    }
+  }
+
+  &__body {
+    padding-top: 1.15rem;
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+
+    h2 {
+      font-size: 1.5rem;
+      transition: color 0.4s var(--ease);
+    }
+  }
+
+  &__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45em;
+    font-size: 0.68rem;
     letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: var(--muted);
-    transition:
-      background 0.4s var(--ease),
-      border-color 0.4s var(--ease),
-      color 0.4s var(--ease);
+    color: var(--gold-deep);
+    white-space: nowrap;
 
-    &:hover {
-      border-color: var(--gold-light);
-      color: var(--ink);
+    svg {
+      transition: transform 0.45s var(--ease);
     }
+  }
 
-    &.is-active {
-      background: var(--ink);
-      border-color: var(--ink);
-      color: var(--cream);
-    }
+  &__card:hover h2 {
+    color: var(--gold-deep);
+  }
+
+  &__card:hover &__link svg {
+    transform: translate(3px, -3px);
+  }
+}
+
+@media (max-width: 560px) {
+  .pf__grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem 0.85rem;
+  }
+
+  .pf__body h2 {
+    font-size: 1.15rem;
+  }
+
+  .pf__link {
+    display: none;
   }
 }

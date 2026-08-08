@@ -5,7 +5,7 @@ import { WhatsAppFab } from './components/WhatsAppFab';
 import { RouteEffects } from './components/ui/RouteEffects';
 import { Home } from './pages/Home';
 import { ExperiencesIndex } from './pages/ExperiencesIndex';
-import { ExperienceDetail } from './pages/ExperienceDetail';
+import { ExperienceGallery } from './pages/ExperienceGallery';
 import { PortfolioPage } from './pages/PortfolioPage';
 import { StoryPage } from './pages/StoryPage';
 import { NotFound } from './pages/NotFound';
@@ -19,7 +19,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/experiencias" element={<ExperiencesIndex />} />
-          <Route path="/experiencias/:slug" element={<ExperienceDetail />} />
+          <Route path="/experiencias/:slug" element={<ExperienceGallery />} />
           <Route path="/portfolio" element={<PortfolioPage />} />
           <Route path="/minha-historia" element={<StoryPage />} />
           <Route path="*" element={<NotFound />} />

@@ -1,0 +1,30 @@
+.xi {
+  &__closing {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 1.1rem;
+
+    h2 {
+      font-size: clamp(1.9rem, 1.3rem + 2.4vw, 3.2rem);
+      max-width: 20ch;
+    }
+
+    p {
+      color: var(--muted);
+      max-width: 56ch;
+    }
+
+    .btn {
+      margin-top: 1rem;
+    }
+  }
+
+  &__footnote {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+  }
+}

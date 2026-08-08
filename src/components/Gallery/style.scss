@@ -3,6 +3,12 @@
   grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
   gap: clamp(0.75rem, 1.6vw, 1.4rem);
 
+  &--few {
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    max-width: 940px;
+    margin-inline: auto;
+  }
+
   &__item {
     position: relative;
     display: block;

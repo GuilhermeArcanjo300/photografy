@@ -224,6 +224,20 @@ export const IconSparkle = ({ size = 24, className }: IconProps) => (
   </svg>
 );
 
+export const IconShield = ({ size = 24, className }: IconProps) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    className={className}
+    aria-hidden="true"
+    {...stroke}
+  >
+    <path d="M12 3l7.5 3v5.4c0 4.3-3.1 8.3-7.5 9.6-4.4-1.3-7.5-5.3-7.5-9.6V6z" />
+    <path d="M9.2 12.1l2 2 3.6-3.8" />
+  </svg>
+);
+
 export const IconQuote = ({ size = 28, className }: IconProps) => (
   <svg
     width={size}

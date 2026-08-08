@@ -1,66 +1,81 @@
-import { useMemo, useState } from 'react';
-import { CATEGORIES, SHOTS } from '../content/portfolio';
-import { Gallery } from '../components/Gallery';
-import { CtaBand } from '../components/ui/CtaBand';
+import { Link } from 'react-router-dom';
+import { EXPERIENCES } from '../content/experiences';
 import { PageHeader } from '../components/ui/PageHeader';
+import { CtaBand } from '../components/ui/CtaBand';
+import { IconArrowUpRight, IconCamera } from '../components/ui/Icons';
 import { useScrollReveal } from '../hooks/useScrollReveal';
 import { useSeo } from '../hooks/useSeo';
+import banner from '../assets/img/optimized/shoots2.webp';
 import './portfolio-page.scss';
 
-/** Galleries organised by category — briefing item 9. */
+/**
+ * Portfólio — capítulo 4 do briefing.
+ * Deixou de ser uma galeria única: agora é a porta de entrada para a galeria
+ * de cada experiência.
+ */
 export function PortfolioPage() {
-  const [active, setActive] = useState<string>('Todos');
-
   useSeo({
     title: 'Portfólio | Deise Akemi Fotografia',
     description:
-      'Galerias de ensaios newborn, gestante, bebê e infantil fotografados por Deise Akemi.',
+      'Histórias que tive o privilégio de registrar. Galerias de newborn, gestante, primeiro ano, smash the cake e mais.',
     path: '/portfolio',
   });
-  useScrollReveal(`portfolio-${active}`);
-
-  const shots = useMemo(
-    () => (active === 'Todos' ? SHOTS : SHOTS.filter((s) => s.category === active)),
-    [active],
-  );
-
-  // Only offer filters that actually have photos behind them.
-  const available = CATEGORIES.filter(
-    (c) => c === 'Todos' || SHOTS.some((s) => s.category === c),
-  );
+  useScrollReveal('portfolio');
 
   return (
     <>
       <PageHeader
-        kicker="Portfólio"
-        title="Momentos que já viraram lembrança"
-        text="Poucas imagens, escolhidas com carinho. Clique em qualquer foto para ampliar."
+        image={banner}
+        focus="center 12%"
+        title="Histórias que tive o privilégio de registrar."
+        text="Cada experiência tem a sua própria galeria. Escolha uma para ver as fotografias."
       />
 
-      <section className="section section--tight">
+      <section className="section">
         <div className="container">
-          <div className="pf__filters" role="tablist" aria-label="Categorias">
-            {available.map((cat) => (
-              <button
-                key={cat}
-                role="tab"
-                aria-selected={active === cat}
-                className={`pf__filter ${active === cat ? 'is-active' : ''}`}
-                onClick={() => setActive(cat)}
+          <div className="pf__grid">
+            {EXPERIENCES.map((exp, i) => (
+              <Link
+                key={exp.slug}
+                to={`/experiencias/${exp.slug}`}
+                className="pf__card"
+                data-reveal
+                data-delay={String((i % 5) + 1)}
               >
-                {cat}
-              </button>
+                <div className="pf__media">
+                  {exp.image ? (
+                    <img
+                      src={exp.image}
+                      alt={exp.name}
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  ) : (
+                    <span className="pf__placeholder" aria-hidden="true">
+                      <span>{exp.short.charAt(0)}</span>
+                      <IconCamera size={18} />
+                    </span>
+                  )}
+                </div>
+
+                <div className="pf__body">
+                  <h2>{exp.short}</h2>
+                  <span className="pf__link">
+                    Ver galeria
+                    <IconArrowUpRight size={15} />
+                  </span>
+                </div>
+              </Link>
             ))}
           </div>
-
-          <Gallery shots={shots} />
         </div>
       </section>
 
       <CtaBand
-        title="Quer ver o seu ensaio aqui?"
-        text="Me chame no WhatsApp e vamos combinar a data."
-        message="Olá, Deise! Vi o portfólio no site e gostaria de agendar um ensaio."
+        title="A próxima história pode ser a sua."
+        text="Me chame no WhatsApp e vamos combinar a data do seu ensaio."
+        secondaryLabel="Falar pelo WhatsApp"
+        secondaryMessage="Olá, Deise! Vi o portfólio no site e gostaria de agendar um ensaio."
       />
     </>
   );

@@ -1,40 +1,66 @@
+import { Link } from 'react-router-dom';
 import { WHATSAPP, whatsappLink } from '../../site';
 import { IconWhatsApp } from './Icons';
 import './cta-band.scss';
 
 /**
- * Closing call to action, repeated after the important sections
- * (briefing item 17 — CTA após cada seção importante).
+ * Chamada final — capítulo 1 do briefing: fundo escuro, foto emocional ao
+ * fundo, um botão principal e um secundário.
  */
 export function CtaBand({
-  kicker = 'Vamos conversar',
   title,
   text,
-  label = 'Pedir orçamento pelo WhatsApp',
-  message,
+  image,
+  focus = 'center 40%',
+  primary,
+  secondaryLabel = 'Solicitar orçamento',
+  secondaryMessage,
 }: {
-  kicker?: string;
   title: string;
   text?: string;
-  label?: string;
-  message?: string;
+  image?: string;
+  focus?: string;
+  /** Botão principal que leva a uma página interna. */
+  primary?: { label: string; to: string };
+  secondaryLabel?: string;
+  secondaryMessage?: string;
 }) {
   return (
-    <section className="cta-band section--dark">
+    <section className={`cta-band ${image ? 'cta-band--photo' : ''}`}>
+      {image && (
+        <div className="cta-band__media">
+          <img
+            src={image}
+            alt=""
+            aria-hidden="true"
+            loading="lazy"
+            decoding="async"
+            style={{ objectPosition: focus }}
+          />
+          <div className="cta-band__veil" />
+        </div>
+      )}
+
       <div className="container cta-band__inner" data-reveal>
-        <p className="kicker kicker--center kicker--light">{kicker}</p>
         <h2 className="cta-band__title">{title}</h2>
         {text && <p className="cta-band__text">{text}</p>}
 
-        <a
-          href={message ? whatsappLink(message) : WHATSAPP}
-          target="_blank"
-          rel="noreferrer"
-          className="btn btn--gold"
-        >
-          <IconWhatsApp size={17} />
-          {label}
-        </a>
+        <div className="cta-band__actions">
+          {primary && (
+            <Link to={primary.to} className="btn btn--gold">
+              {primary.label}
+            </Link>
+          )}
+          <a
+            href={secondaryMessage ? whatsappLink(secondaryMessage) : WHATSAPP}
+            target="_blank"
+            rel="noreferrer"
+            className={primary ? 'btn btn--ghost-light' : 'btn btn--gold'}
+          >
+            <IconWhatsApp size={17} />
+            {secondaryLabel}
+          </a>
+        </div>
       </div>
     </section>
   );

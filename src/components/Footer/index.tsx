@@ -4,6 +4,7 @@ import { EXPERIENCES } from '../../content/experiences';
 import { IconInstagram, IconWhatsApp } from '../ui/Icons';
 import './style.scss';
 
+/** Rodapé — capítulo 5 do briefing: limpo, com a faixa bege de fecho. */
 export function Footer() {
   const year = new Date().getFullYear();
 
@@ -13,15 +14,13 @@ export function Footer() {
         <div className="footer__brand">
           <p className="footer__name">{SITE.name}</p>
           <p className="footer__sub">Fotografia</p>
-          <p className="footer__tagline">{SITE.tagline}</p>
+          <p className="footer__role">
+            Especialista em Newborn, Gestante e Fotografia de Família.
+          </p>
+          {SITE.city && <p className="footer__city">📍 {SITE.city}</p>}
 
           <div className="footer__social">
-            <a
-              href={WHATSAPP}
-              target="_blank"
-              rel="noreferrer"
-              aria-label="WhatsApp"
-            >
+            <a href={WHATSAPP} target="_blank" rel="noreferrer" aria-label="WhatsApp">
               <IconWhatsApp size={19} />
             </a>
             <a
@@ -35,8 +34,8 @@ export function Footer() {
           </div>
         </div>
 
-        <nav className="footer__col" aria-label="Experiências">
-          <h3>Experiências</h3>
+        <nav className="footer__col" aria-label="Coleções de Experiências">
+          <h2>Experiências</h2>
           <ul>
             {EXPERIENCES.map((e) => (
               <li key={e.slug}>
@@ -47,7 +46,7 @@ export function Footer() {
         </nav>
 
         <nav className="footer__col" aria-label="Navegação">
-          <h3>Navegação</h3>
+          <h2>Navegação</h2>
           <ul>
             <li>
               <Link to="/">Início</Link>
@@ -71,7 +70,7 @@ export function Footer() {
         </nav>
 
         <div className="footer__col">
-          <h3>Contato</h3>
+          <h2>Contato</h2>
           <ul>
             <li>
               <a href={WHATSAPP} target="_blank" rel="noreferrer">
@@ -88,7 +87,6 @@ export function Footer() {
                 <a href={`mailto:${SITE.email}`}>{SITE.email}</a>
               </li>
             )}
-            {SITE.city && <li>{SITE.city}</li>}
           </ul>
         </div>
       </div>
@@ -97,7 +95,10 @@ export function Footer() {
         <p>
           © {year} {SITE.fullName}. Todos os direitos reservados.
         </p>
-        <p>Cada fotografia, uma lembrança para toda a vida.</p>
+      </div>
+
+      <div className="footer__closing">
+        <p>Cada família tem uma história única. Vamos contar a sua?</p>
       </div>
     </footer>
   );

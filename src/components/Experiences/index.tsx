@@ -1,23 +1,20 @@
 import { Link } from 'react-router-dom';
-import { EXPERIENCES, type Experience } from '../../content/experiences';
-import { IconArrowUpRight, IconCamera } from '../ui/Icons';
+import {
+  EXPERIENCES,
+  guideLink,
+  type Experience,
+} from '../../content/experiences';
+import { IconCamera, IconWhatsApp } from '../ui/Icons';
 import './style.scss';
 
-/** Cheapest collection price, used as the "a partir de" hint on the card. */
-function fromPrice(exp: Experience): string | null {
-  if (!exp.collections.length) return null;
-  const values = exp.collections.map((c) =>
-    Number(c.price.replace(/[^\d,]/g, '').replace(/\./g, '').replace(',', '.')),
-  );
-  const min = Math.min(...values.filter((n) => !Number.isNaN(n)));
-  if (!Number.isFinite(min)) return null;
-  return min.toLocaleString('pt-BR', {
-    style: 'currency',
-    currency: 'BRL',
-    minimumFractionDigits: 2,
-  });
-}
-
+/**
+ * Card de experiência — capítulo 3 do briefing.
+ *
+ * Sem preço, dois caminhos: ver a galeria ou pedir o guia no WhatsApp.
+ * O briefing descreve título e botão surgindo no hover; aqui eles ficam sempre
+ * visíveis porque no celular não existe hover e são as ações principais — o
+ * "zoom suave" na foto foi mantido.
+ */
 export function ExperienceCard({
   exp,
   index = 0,
@@ -25,86 +22,68 @@ export function ExperienceCard({
   exp: Experience;
   index?: number;
 }) {
-  const price = fromPrice(exp);
-
   return (
     <article
       className="exp-card"
       data-reveal
       data-delay={String((index % 5) + 1)}
     >
-      <Link to={`/experiencias/${exp.slug}`} className="exp-card__link">
-        <div className="exp-card__media">
-          {exp.image ? (
-            <img src={exp.image} alt={exp.name} loading="lazy" decoding="async" />
-          ) : (
-            <div className="exp-card__placeholder" aria-hidden="true">
-              <span>{exp.short.charAt(0)}</span>
-              <IconCamera size={20} />
-            </div>
-          )}
-        </div>
-
-        <div className="exp-card__body">
-          <h3 className="exp-card__name">{exp.name}</h3>
-          <p className="exp-card__summary">{exp.summary}</p>
-
-          <div className="exp-card__foot">
-            <span className="exp-card__price">
-              {price ? (
-                <>
-                  <small>a partir de</small> {price}
-                </>
-              ) : (
-                <small>valores sob consulta</small>
-              )}
-            </span>
-            <IconArrowUpRight size={17} />
-          </div>
-        </div>
+      <Link
+        to={`/experiencias/${exp.slug}`}
+        className="exp-card__media"
+        aria-label={`Ver galeria — ${exp.name}`}
+      >
+        {exp.image ? (
+          <img src={exp.image} alt={exp.name} loading="lazy" decoding="async" />
+        ) : (
+          <span className="exp-card__placeholder" aria-hidden="true">
+            <span>{exp.short.charAt(0)}</span>
+            <IconCamera size={20} />
+          </span>
+        )}
       </Link>
+
+      <div className="exp-card__body">
+        <h3 className="exp-card__name">
+          <Link to={`/experiencias/${exp.slug}`}>{exp.short}</Link>
+        </h3>
+        <p className="exp-card__text">{exp.cardText}</p>
+
+        <div className="exp-card__actions">
+          <Link
+            to={`/experiencias/${exp.slug}`}
+            className="btn btn--ghost btn--sm exp-card__btn"
+          >
+            Ver galeria
+          </Link>
+          <a
+            href={guideLink(exp)}
+            target="_blank"
+            rel="noreferrer"
+            className="btn btn--gold btn--sm exp-card__btn"
+          >
+            <IconWhatsApp size={15} />
+            Guia completo
+          </a>
+        </div>
+      </div>
     </article>
   );
 }
 
-/** Experience cards — briefing item 7. */
-export function Experiences({
-  title = 'Experiências',
-  limit,
-}: {
-  title?: string;
-  limit?: number;
-}) {
-  const list = limit ? EXPERIENCES.slice(0, limit) : EXPERIENCES;
+/** Grade de experiências, usada na home (4) e no índice (todas). */
+export function ExperienceGrid({ slugs }: { slugs?: string[] }) {
+  const list = slugs
+    ? (slugs
+        .map((s) => EXPERIENCES.find((e) => e.slug === s))
+        .filter(Boolean) as Experience[])
+    : EXPERIENCES;
 
   return (
-    <section className="section exp" id="experiencias">
-      <div className="container">
-        <header className="exp__head" data-reveal>
-          <p className="kicker">Escolha o seu momento</p>
-          <h2 className="section-title">
-            {title} <em>para cada capítulo</em>
-          </h2>
-          <p className="lead">
-            Cada ensaio é preparado com direção completa, sem pressa e com muito
-            carinho — do primeiro contato até a entrega das suas lembranças.
-          </p>
-        </header>
-
-        <div className="exp__grid">
-          {list.map((exp, i) => (
-            <ExperienceCard key={exp.slug} exp={exp} index={i} />
-          ))}
-        </div>
-
-        {limit && limit < EXPERIENCES.length && (
-          <div className="exp__more" data-reveal>
-            <Link to="/experiencias" className="btn btn--ghost">
-              Ver todas as experiências
-            </Link>
-          </div>
-        )}
-      </div>
-    </section>
+    <div className="exp__grid">
+      {list.map((exp, i) => (
+        <ExperienceCard key={exp.slug} exp={exp} index={i} />
+      ))}
+    </div>
   );
 }

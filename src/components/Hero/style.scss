@@ -4,7 +4,7 @@
   display: flex;
   align-items: flex-end;
   overflow: hidden;
-  background: var(--sand);
+  background: var(--ink);
 
   &__media {
     position: absolute;
@@ -19,8 +19,8 @@
     }
   }
 
-  /* Keeps the cream type legible over a bright photograph: a side wash for the
-     text column plus a bottom wash, so the photo stays visible on the right. */
+  /* Lavagem lateral para o texto claro + base escurecida, mantendo a foto
+     visível do lado direito. */
   &__veil {
     position: absolute;
     inset: 0;
@@ -50,30 +50,29 @@
 
   &__kicker {
     font-size: 0.7rem;
-    letter-spacing: 0.4em;
+    letter-spacing: 0.36em;
     text-transform: uppercase;
     color: #f0dfba;
     text-shadow: 0 1px 12px rgba(18, 15, 12, 0.55);
     margin-bottom: 1.5rem;
+
+    i {
+      font-style: normal;
+      opacity: 0.6;
+      margin-inline: 0.25em;
+    }
   }
 
   &__title {
-    font-size: clamp(2.5rem, 1.1rem + 6.4vw, 5.9rem);
+    font-size: clamp(2.3rem, 1rem + 5.6vw, 5.2rem);
     color: var(--cream);
-    max-width: 21ch;
+    max-width: 20ch;
     text-wrap: balance;
 
     em {
       font-style: italic;
       color: var(--gold-light);
     }
-  }
-
-  &__lead {
-    margin-top: 1.75rem;
-    max-width: 50ch;
-    color: rgba(252, 250, 246, 0.84);
-    font-size: 1.02rem;
   }
 
   &__actions {

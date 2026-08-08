@@ -1,37 +1,23 @@
 .exp {
-  &__head {
-    max-width: 60ch;
-    margin-bottom: clamp(2.75rem, 6vw, 4.5rem);
-
-    .lead {
-      margin-top: 1.4rem;
-    }
-  }
-
   &__grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(285px, 1fr));
-    gap: clamp(1.5rem, 3vw, 2.75rem);
-  }
-
-  &__more {
-    margin-top: clamp(2.5rem, 5vw, 4rem);
-    display: flex;
-    justify-content: center;
+    grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+    /* Briefing: "muito espaço entre os cards". */
+    gap: clamp(2rem, 4vw, 3.5rem);
   }
 }
 
 .exp-card {
-  &__link {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-  }
+  display: flex;
+  flex-direction: column;
 
   &__media {
+    display: block;
     position: relative;
     aspect-ratio: 4 / 5;
     overflow: hidden;
+    /* Briefing: "fotos com cantos levemente arredondados". */
+    border-radius: 10px;
     background: var(--beige);
 
     img {
@@ -40,28 +26,30 @@
       object-fit: cover;
       transition: transform 1.1s var(--ease);
     }
+
+    &:hover img {
+      transform: scale(1.05);
+    }
   }
 
-  /* Shown until the studio supplies a photo for this experience. */
+  /* Enquanto o estúdio não envia a foto desta experiência. */
   &__placeholder {
-    position: relative;
-    width: 100%;
-    height: 100%;
+    position: absolute;
+    inset: 0;
     display: grid;
     place-items: center;
-    gap: 0.5rem;
-    background:
-      radial-gradient(
-        circle at 50% 38%,
-        var(--gold-wash) 0%,
-        var(--beige) 55%,
-        var(--sand) 100%
-      );
+    gap: 0.4rem;
+    background: radial-gradient(
+      circle at 50% 38%,
+      var(--gold-wash) 0%,
+      var(--beige) 55%,
+      var(--sand) 100%
+    );
     color: var(--gold);
 
     span {
       font-family: var(--font-display);
-      font-size: clamp(3.5rem, 9vw, 5rem);
+      font-size: clamp(3rem, 8vw, 4.6rem);
       line-height: 1;
       opacity: 0.5;
     }
@@ -72,63 +60,78 @@
   }
 
   &__body {
-    padding-top: 1.4rem;
+    padding-top: 1.35rem;
     display: flex;
     flex-direction: column;
     flex: 1;
   }
 
   &__name {
-    font-size: 1.65rem;
-    transition: color 0.4s var(--ease);
+    font-size: 1.6rem;
+
+    a {
+      transition: color 0.4s var(--ease);
+    }
+
+    a:hover {
+      color: var(--gold-deep);
+    }
   }
 
-  &__summary {
-    margin-top: 0.6rem;
+  &__text {
+    margin-top: 0.55rem;
     color: var(--muted);
     font-size: 0.94rem;
     line-height: 1.65;
     flex: 1;
   }
 
-  &__foot {
+  &__actions {
     margin-top: 1.35rem;
-    padding-top: 1.1rem;
-    border-top: 1px solid var(--line);
     display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1rem;
-    color: var(--gold-deep);
+    flex-wrap: wrap;
+    gap: 0.6rem;
   }
 
-  &__price {
-    font-size: 1rem;
-    letter-spacing: 0.02em;
+  &__btn {
+    flex: 1 1 auto;
+    white-space: nowrap;
+  }
+}
 
-    small {
-      display: block;
+/* Briefing: "no celular, duas fotos por linha sempre que possível". */
+@media (max-width: 700px) {
+  .exp__grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem 0.85rem;
+  }
+
+  .exp-card {
+    &__name {
+      font-size: 1.2rem;
+    }
+
+    &__text {
+      font-size: 0.84rem;
+    }
+
+    &__actions {
+      flex-direction: column;
+      gap: 0.45rem;
+    }
+
+    &__btn {
+      width: 100%;
+      padding-inline: 0.9em;
       font-size: 0.66rem;
-      letter-spacing: 0.24em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-bottom: 0.15rem;
+      letter-spacing: 0.1em;
     }
   }
+}
 
-  &__foot svg {
-    transition: transform 0.5s var(--ease);
-  }
-
-  &__link:hover &__media img {
-    transform: scale(1.06);
-  }
-
-  &:hover &__name {
-    color: var(--gold-deep);
-  }
-
-  &:hover &__foot svg {
-    transform: translate(3px, -3px);
+/* Telas muito estreitas não comportam duas colunas com dois botões. */
+@media (max-width: 359px) {
+  .exp__grid {
+    grid-template-columns: 1fr;
   }
 }

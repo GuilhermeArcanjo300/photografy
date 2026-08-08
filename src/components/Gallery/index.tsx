@@ -1,7 +1,14 @@
 import { useCallback, useEffect, useState } from 'react';
-import type { Shot } from '../../content/portfolio';
 import { IconArrowLeft, IconArrowRight, IconClose } from '../ui/Icons';
 import './style.scss';
+
+export type Shot = {
+  src: string;
+  alt: string;
+  category: string;
+  /** Fotos verticais ocupam uma célula mais alta no mosaico. */
+  portrait?: boolean;
+};
 
 /**
  * Photo mosaic with a lightbox. Portrait shots take a taller cell so the grid
@@ -40,7 +47,9 @@ export function Gallery({ shots }: { shots: Shot[] }) {
 
   return (
     <>
-      <div className="gallery">
+      {/* Enquanto a experiência tem poucas fotos, células maiores evitam que a
+          galeria pareça vazia. Com 20-30 fotos volta ao mosaico normal. */}
+      <div className={`gallery ${shots.length <= 3 ? 'gallery--few' : ''}`}>
         {shots.map((shot, i) => (
           <button
             key={`${shot.src}-${i}`}

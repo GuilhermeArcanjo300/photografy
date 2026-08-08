@@ -41,9 +41,13 @@
   }
 }
 
-@media (max-width: 620px) {
+/* No celular o botão nunca some — é o principal caminho de contato. */
+@media (max-width: 700px) {
   .fab {
-    padding: 0.95rem;
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    padding: 1rem;
 
     &__label {
       display: none;
